@@ -23,14 +23,14 @@ class Song(models.Model):
     """Model representing a song"""
     name = models.CharField(
         max_length=200, help_text=_('Enter a song name'))
-    image = models.ImageField(
-        upload_to='cover_image', height_field=100, width_field=100)
+    image = models.ImageField(upload_to='cover_image')
     content = models.FileField(upload_to='songs')
     artist = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.BooleanField(
         default=False,
         help_text=_('Check this box to make the song public')
     )
+    listen_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         """Return song name"""
