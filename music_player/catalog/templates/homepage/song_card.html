@@ -17,10 +17,10 @@
 </div>
 <h2 class = "section-header"> {% trans "Trending Songs" %}</h2>
 <div class = "row cards-wrapper">
-  {% for i in song %}
+  {% for i in trending %}
   <div class = "card-wrapper">
   <div class="card card-styling">
-  <img src="/media/{{i.image}}" class="card-img-top" alt="...">
+  <img src="{{ i.image.url }}">
   <div class="card-body">
     <h5 class="card-title"> {{i.name}}</h5>
     <p class="card-text"> {{i.tags}}</p>
@@ -38,7 +38,7 @@
 {% for i in song %}
   <div class = "card-wrapper">
   <div class="card card-styling">
-  <img src="/media/{{i.image}}" class="card-img-top" alt="...">
+  <img src="{{ i.image.url }}">
   <div class="card-body">
     <h5 class="card-title"> {{i.name}}</h5>
     <p class="card-text"> {{i.tags}}</p>
@@ -56,7 +56,7 @@
 {% for i in song %}
   <div class = "card-wrapper">
   <div class="card card-styling">
-  <img src="/media/{{i.image}}" class="card-img-top" alt="...">
+  <img src="{{ i.image.url }}">
   <div class="card-body">
     <h5 class="card-title"> {{i.name}}</h5>
     <p class="card-text"> {{i.tags}}</p>

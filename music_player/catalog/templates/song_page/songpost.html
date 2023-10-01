@@ -7,22 +7,45 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <img src="/media/{{song.image}}" height="350px" width="350px">
-        </div>
         <div class="col-md-6">
-            <h2 style="padding-top: 6%; font-weight: 550; color: coral;">Title: {{song.name}}
-            <h4 style="padding-top: 2%; font-weight: 550;">Category: {{song.tags}}</h4>
-            <h4 style="padding-top: 2%; font-weight: 550;">Artist: {{song.Artist}}</h4>
-            <video width="320" height="80" controls>
+            <!-- Left Column: Current Song Details -->
+            <img class="card-image" src="{{ song.image.url }}">
+            <h2 class="card-title-coral">Title: {{song.name}}</h2>
+            
+            <h4 class="card-tags">Category: 
+                {% for i in song.tags.all %}
+                <div class="p-1 d-inline-block border border-primary rounded">{{i.name}}</div>
+                {% endfor %}
+            </h4>
+            <h4 class="card-artist">Artist: 
+              <a href="/catalog/artist/{{song.artist.id}}">
+                <button class="p-1 d-inline-block border border-primary rounded">{{song.artist.username}}</button>
+            </h4>
+            <!-- Like Count -->
+            <a href="/catalog/like_count/{{song.id}}">
+                <button class="button-solid">❤️ {{song.like_count}}</button>
+            </a>
+            <!-- Like Count End -->
+            <!-- Download Button -->
+            <a href="/media/{{ song.content }}" download="{{ song.name }}" type="video/mp4" class="button-download">
+                <button class="btn btn-danger btn-lg">Download Song</button>
+            </a>
+            <!-- Video Player -->
+            <video class="card-video" controls>
                 <source src="/media/{{song.content}}" type="video/mp4">
             </video>
-            <a href="/media/{{ song.content }}" download="{{ song.name }}" type="video/mp4">
-                <button class="btn btn-outline-danger">Download Song</button>
-            </a>
+        </div>
+        <div class="col-md-6">
+            <!-- Right Column: Recommended Songs Table-->
+            <h3>Recommended Songs</h3>
+            <table class="table table-bordered">
+                <tbody>
+                    {% for i in recommended_song %}
+                      {% include 'song_page/song_card_partial.html' with recommended_song=recommended_song %}
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
-<br>
 </div>
 {% endblock %}
